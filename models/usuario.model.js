@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 
-let usuario = new mongoose.Schema()
-usuario.add({
+let usuarioSchema = new mongoose.Schema()
+usuarioSchema.add({
     primerNombre: { type: String, required: [true,"Campo nombre obligatorio"] },
     segundoNombre: { type: String, required: false },
     primerApellido: { type: String, required: [true,"Primer Apellido obligatorio"] },
@@ -16,9 +16,11 @@ usuario.add({
     activo: { type: Boolean, default: true }
 }
 )
-a = () => {
-    console.log(mongoose.Types)
-}
-let modelo = mongoose.model("usuario", usuario,)
+usuarioSchema.virtual("fullName").get(function(){
+    let fullname = `${this.primerNombre} ${this.segundoNombre} ${primerApellido} ${segundoApellido}`
+    return fullname
+})
+
+let modelo = mongoose.model("usuario", usuarioSchema)
 
 module.exports = modelo

@@ -4,13 +4,15 @@ const express = require('express')
 const app = express();
 
 
-const { RegisterUserController, HomeController } = require('../routers')
+const { RegisterUserController, HomeController,SecretController } = require('../routers')
 
 app.use(express.static('../public'));
 app.use(express.json());
 //Rutas
-app.use('/', HomeController)
+app.use('/', HomeController);
 app.use('/register', RegisterUserController);
+app.use('/secret',SecretController)
+
 
 main()
 async function main() {

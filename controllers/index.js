@@ -1,4 +1,6 @@
 module.exports = {
+    HomeController: require('./HomeController'),
     RegisterUserController: require('./RegisterUserController'),
-    HomeController: require('./HomeController')
+    SecretController : require('./Secret.Controller')
+   
 }

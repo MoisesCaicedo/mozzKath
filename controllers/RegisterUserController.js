@@ -1,7 +1,13 @@
 class RegisterUserController {
+
     async register(req, res) {
-        return res.send({ message: 'hello ResgistroUserControles' })
+        console.log("en registro")
+        return res.send({ message: 'Hola soy ResgistroUserControles' })
     }
+
+
+
+
 
 }
 

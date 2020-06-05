@@ -1,5 +1,5 @@
 const mongoose = require("mongoose");
-console.log(process.env.DB)
+// console.log(process.env.DB)
 mongoose.connect(process.env.DB,
     {
         useUnifiedTopology: true,
@@ -7,8 +7,9 @@ mongoose.connect(process.env.DB,
     }
 );
 let db = mongoose.connection;
-db.on('error',
-    console.error.bind(console, 'connection error:'));
-db.once('open', function () {
-    console.log("DB ok")
-});
+module.exports = db
+// db.on('error',
+//     console.error.bind(console, 'connection error:'));
+// db.once('open', function () {
+//     console.log("DB ok")
+// });

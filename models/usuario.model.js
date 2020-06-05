@@ -12,6 +12,7 @@ const email = {
 
 }
 
+
 usuarioSchema.add({
     primerNombre: { type: String, required: [true, "{PATH} es requerido"] },
     segundoNombre: { type: String, required: false },
@@ -28,12 +29,23 @@ usuarioSchema.add({
     activo: { type: Boolean, default: true }
 }
 )
+const validadorMail = function (cadena) {
+    let validaciones = require('../general').validaciones
+    return validaciones.email(cadena)
+}
+usuarioSchema.path('email').validate(validadorMail,
+    '{VALUE} no es email valido',
+    'Invalid Email')
+usuarioSchema.methods.toJSON = function () {
+    let user = this;
+    let userObjet = user.toObject();
+    delete userObjet.password;
+    return userObjet;
+}
 usuarioSchema.plugin(uniqueValidator, { message: `El {PATH} : {VALUE} ya existe..` });
 usuarioSchema.virtual("fullName").get(function () {
     let fullname = `${this.primerNombre} ${this.segundoNombre} ${primerApellido} ${segundoApellido}`
     return fullname
 })
-
 let modelo = mongoose.model("usuario", usuarioSchema)
-
 module.exports = modelo
